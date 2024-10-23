@@ -24,7 +24,7 @@ const errorHandler = (error: Error) => {
   errorMessage.value = error.message
   setTimeout(() => {
     errorMessage.value = ''
-  }, 60 * 5)
+  }, 1000 * 5)
 }
 
 onMounted(() => {
