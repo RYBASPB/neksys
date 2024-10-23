@@ -24,7 +24,10 @@ function createEntityList(): Entity[] {
 export class MockEntityApi implements EntityApi {
   private readonly entityList: Map<number, Entity>
   constructor() {
-    const entities = createEntityList()
+    let entities: Entity[] = []
+    if (import.meta.env.DEV) {
+      entities = createEntityList()
+    }
     this.entityList = new Map(entities.map(e => [e.id, e]))
   }
 
