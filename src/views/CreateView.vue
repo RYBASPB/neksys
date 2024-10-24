@@ -2,18 +2,23 @@
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { EntitySchema } from '@/services/validation/entity'
-import { onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { onMounted, onUpdated, ref } from 'vue'
+import { onBeforeRouteLeave, useRoute, useRouter } from 'vue-router'
 import { allEntities, maxKey } from '@/state/entities'
 
+// for getting entity id and redirect to home_view after edit
 const route = useRoute()
 const router = useRouter()
 const entityId = ref<number>()
 
+onBeforeRouteLeave(() => {
+  resetForm()
+  entityId.value = NaN
+})
+
 const isEdit = () => {
   return !!(route.name === 'edit' && route.params.id)
 }
-
 const isCreate = () => {
   return route.name === 'create'
 }
@@ -33,7 +38,15 @@ onMounted(() => {
   }
 })
 
-const { defineField, errors, setFieldValue, setValues, handleSubmit } = useForm({
+onUpdated(() => {
+  if (isCreate() && !entityId.value) {
+    entityId.value = maxKey.value + 1
+    setFieldValue('id', entityId.value)
+  }
+})
+
+// create form, validate by zod schema, validateOnMont for highlighting required fields
+const { defineField, errors, setFieldValue, setValues, handleSubmit, resetForm } = useForm({
   validationSchema: toTypedSchema(EntitySchema),
   validateOnMount: true,
   initialValues: {
@@ -42,20 +55,20 @@ const { defineField, errors, setFieldValue, setValues, handleSubmit } = useForm(
   },
 })
 
-const onSubmit = handleSubmit((values, actions) => {
-  console.log(values)
-  // TODO Api ADD
+const onSubmit = handleSubmit(async (values, actions) => {
   if (isEdit()) {
+    // TODO await Api Edit
     allEntities.value.set(values.id, values)
   }
-  console.log(isCreate(), entityId.value)
+
   if (isCreate() && entityId.value) {
+    // TODO await Api Add
     allEntities.value.set(entityId.value, values)
     maxKey.value = entityId.value
   }
   entityId.value = NaN
   actions.resetForm()
-  router.push('/')
+  await router.push('/')
 })
 
 const [title, titleProps] = defineField('title')
