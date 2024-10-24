@@ -15,8 +15,11 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@vee-validate/zod": "^4.14.3",
+    "vee-validate": "^4.14.3",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
