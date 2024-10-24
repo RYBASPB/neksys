@@ -34,4 +34,5 @@ onMounted(() => {
     <RouterView />
     <ShowError v-if="errorMessage" :error-message="errorMessage"/>
   </main>
+  <footer class="h-4 lg:h-8"></footer>
 </template>
