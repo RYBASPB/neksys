@@ -38,6 +38,7 @@ const { defineField, errors, setFieldValue, setValues, handleSubmit } = useForm(
   validateOnMount: true,
   initialValues: {
     published: false,
+    published_from: null,
   },
 })
 
@@ -57,17 +58,19 @@ const onSubmit = handleSubmit((values, actions) => {
   router.push('/')
 })
 
-const dateInput = ref()
-const dateInputHandler = (e: Event) => {
-  const inputValue = (e.target as HTMLInputElement).value
-  const timestamp = Date.parse(inputValue)
-  const date = new Date(timestamp)
-  setFieldValue('published_from', date)
-}
-
 const [title, titleProps] = defineField('title')
 const [description, descriptionProps] = defineField('description')
 const [published, publishedProps] = defineField('published')
+
+const [publishedFrom, publishedFromProps] = defineField('published_from')
+// handle empty date input, set null on empty string
+const handlePublishedFrom = (e: Event) => {
+  let value: string | null = (e.target as HTMLInputElement).value
+  if (value === '') {
+    value = null
+  }
+  setFieldValue('published_from', value)
+}
 
 const inputClasses = 'w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200\n'
   + '         rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400\n'
@@ -129,10 +132,11 @@ const inputClasses = 'w-full bg-transparent placeholder:text-slate-400 text-slat
           Published from
         </label>
         <input
-          v-model="dateInput"
-          @change="dateInputHandler"
+          :value="publishedFrom"
+          v-bind="publishedFromProps"
           :class="inputClasses"
-          type="datetime-local"
+          @input="handlePublishedFrom"
+          type="date"
           placeholder="Published from ..."
         />
         <p class="text-red-500 text-xs italic">{{ errors.published_from }}</p>
