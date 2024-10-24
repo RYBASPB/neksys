@@ -3,5 +3,5 @@ export interface Entity {
   title: string // < 50 symbols
   description: string // md
   published: boolean // required
-  published_from?: Date // nullable
+  published_from: string | null // nullable
 }

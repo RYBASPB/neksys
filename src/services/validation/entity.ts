@@ -7,7 +7,7 @@ export const EntitySchema = z
     title: z.string().max(50), // < 50 symbols
     description: z.string(), // md
     published: z.boolean(), // required
-    published_from: z.date().optional(),
+    published_from: z.string().date().nullable(),
   }) satisfies z.ZodType<Entity>
 
 export const CreateEntitySchema = EntitySchema

@@ -13,7 +13,7 @@ function createEntityList(): Entity[] {
       published: faker.datatype.boolean(0.7),
       published_from: faker.date.between({
         from: '2010-01-01', to: Date.now(),
-      }),
+      }).toISOString().slice(0, 10),
       title: faker.lorem.sentence({ min: 1, max: 6 }),
     }
     list.push(entity)
