@@ -34,6 +34,7 @@ export class MockEntityApi implements EntityApi {
   // Тип entity - Entity, а не CreateEntityDto, так как если в нашем backend
   // не реализована автоматическая выдача id, то мы будем делать это на frontend
   public create(entity: Entity): Promise<Entity> {
+    console.log('API: Create Entity')
     if (this.entityList.has(entity.id)) {
       return Promise.reject(new Error(ENTITY_EXISTS))
     }
@@ -42,11 +43,13 @@ export class MockEntityApi implements EntityApi {
   }
 
   public delete(entityId: number): Promise<void> {
+    console.log('API: Delete Entity')
     this.entityList.delete(entityId)
     return Promise.resolve()
   }
 
   public getAll(): Promise<Entity[]> {
+    console.log('API: Get All Entities')
     if (this.entityList.size === 0) {
       return Promise.reject(new Error(NO_ENTITY_FOUND))
     }
@@ -54,6 +57,7 @@ export class MockEntityApi implements EntityApi {
   }
 
   public update(entity: UpdateEntityDto): Promise<Entity> {
+    console.log('API: Update Entity')
     const prevEntity = this.entityList.get(entity.id)
     // TODO объединить объекты
     const newEntity = { ...prevEntity, ...entity }
