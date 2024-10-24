@@ -5,10 +5,10 @@ import HomeHeader from '@/components/HomeHeader.vue'
 import { onMounted, ref } from 'vue'
 import { loadEntities } from '@/state/entities'
 import type { EntityApi } from '@/api/entity'
-import ShowError from '@/components/ShowError.vue'
+import ShowError from '@/components/EntityDelete/ShowError.vue'
 
 interface Props {
-  apiLoader: EntityApi
+  apiLoader?: EntityApi
 }
 const { apiLoader } = defineProps<Props>()
 
@@ -21,7 +21,10 @@ const errorHandler = (error: Error) => {
 }
 
 onMounted(() => {
-  loadEntities(apiLoader, errorHandler)
+  // load entities from api
+  if (apiLoader) {
+    loadEntities(apiLoader, errorHandler)
+  }
 })
 </script>
 
