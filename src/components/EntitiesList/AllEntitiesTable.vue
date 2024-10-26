@@ -3,12 +3,10 @@
 import type { Entity } from '@/models/entity'
 
 interface Props {
-  allEntities: Entity[]
   filteredEntities: Entity[]
-  isSearchActive: boolean
 }
 
-const { filteredEntities, allEntities } = defineProps<Props>()
+const { filteredEntities } = defineProps<Props>()
 
 defineEmits<{
   (e: 'deleteEntity', id: number): void
@@ -51,7 +49,7 @@ const tableColumns: TableColumn[] = [
 </script>
 <template>
   <div class="min-w-40 relative container overflow-x-auto flex flex-col items-center">
-    <template v-if="allEntities.length === 0">
+    <template v-if="filteredEntities.length === 0">
       <p class="text-xl text-center my-2">Нет доступных элементов</p>
     </template>
     <template v-else>
@@ -71,7 +69,7 @@ const tableColumns: TableColumn[] = [
         </thead>
         <tbody>
         <tr
-          :key="entity.id" v-for="entity in isSearchActive ? filteredEntities : allEntities"
+          :key="entity.id" v-for="entity in filteredEntities"
           class="[&>td]:text-center [&>td]:text-wrap"
         >
           <td class="hidden md:table-cell">{{ entity.id }}</td>
