@@ -1,61 +1,45 @@
-# .
+# Тестовое задание для Нексис
 
-This template should help get you started developing with Vue 3 in Vite.
+## Технологии
 
-## Recommended IDE Setup
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+![Vitest](https://img.shields.io/badge/-Vitest-252529?style=for-the-badge&logo=vitest&logoColor=FCC72B)
+![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Функционал
+ 
++ Список-таблица с переходом на редактирование и создание с фильтром по title
+![Список-таблица](screenshots/main_table.png)
 
-## Type Support for `.vue` Imports in TS
++ Список-сетка со всеми отображаемыми полями с фильтром по title
+![Список-сетка](screenshots/main_grid.png)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
++ Удаление с попап-подтверждением
+![Удаление](screenshots/delete.png)
 
-## Customize configuration
++ Страница создания и редактирования (в зависимости от пути)
++ ![Страница создания](screenshots/create.png)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
++ В DEV окружении подключается faker и создает заданное количество сущностей (по умолчанию = 100)
++ Зависимости для создания формы, её валидации, определения путей:
+```json
+{
+  "vee-validate": "^4.14.3",
+  "@vee-validate/zod": "^4.14.3",
+  "zod": "^3.23.8",
+  "vue-router": "^4.4.5"
+}
+```
++ в ветке infinite-scroll частично реализовал подгрузку значений при скролле
 
-## Project Setup
+## Запуск проекта в режиме разработки
 
 ```sh
 pnpm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-pnpm test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-pnpm test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-pnpm build
-pnpm test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
