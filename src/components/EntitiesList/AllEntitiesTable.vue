@@ -51,6 +51,9 @@ const tableColumns: TableColumn[] = [
   <div class="min-w-40 relative container overflow-x-auto flex flex-col items-center">
     <template v-if="filteredEntities.length === 0">
       <p class="text-xl text-center my-2">Нет доступных элементов</p>
+      <RouterLink to="/create" class="py-2 px-4 mx-auto bg-blue-200 hover:bg-blue-400 rounded-2xl">
+        Создать новую запись
+      </RouterLink>
     </template>
     <template v-else>
       <h1 class="w-full text-xl text-center my-2">Все элементы</h1>
