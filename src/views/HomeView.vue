@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { allEntities } from '@/state/entities'
 import SearchByTitle from '@/components/SearchByTitle.vue'
-import { defineAsyncComponent, ref } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
 import type { Entity } from '@/models/entity'
 import DeletePopup from '@/components/EntityDelete/DeletePopup.vue'
 import { isTableView } from '@/state/ui'
@@ -20,17 +20,18 @@ const AllEntitiesGrid = defineAsyncComponent({
 
 const searchValue = ref<string>('')
 const allEntitiesArray = ref(Array.from(allEntities.value.values()))
-const filteredEntities = ref<Entity[]>([])
+const filteredEntities = computed(() => {
+  return allEntitiesArray.value.filter(entity => entity.title.toLowerCase().includes(searchValue.value.toLowerCase()))
+})
 const isSearchActive = ref<boolean>(false)
 
 const showDeletePopup = ref<boolean>(false)
 const entityToDelete = ref<number>()
 
 const handleSearch = (value: string) => {
+  searchValue.value = value
   if (value) {
-    searchValue.value = value
     isSearchActive.value = true
-    filteredEntities.value = allEntitiesArray.value.filter(entity => entity.title.toLowerCase().includes(value.toLowerCase()))
     return
   }
   isSearchActive.value = false
@@ -81,7 +82,6 @@ const deleteEntity = () => {
     <AllEntitiesGrid
       v-else
       @deleteEntity="handleDelete"
-      :allEntities="allEntitiesArray"
       :filteredEntities="filteredEntities"
       :isSearchActive="isSearchActive"
     />
