@@ -4,9 +4,10 @@ import router from './router'
 import { mockEntityApi } from '@/api/mockEntity'
 
 const app = createApp(App, {
-  apiLoader: mockEntityApi,
+  apiLoader: import.meta.env.DEV ? mockEntityApi : undefined,
 })
 
 app.use(router)
+app.config.performance = true
 
 app.mount('#app')
