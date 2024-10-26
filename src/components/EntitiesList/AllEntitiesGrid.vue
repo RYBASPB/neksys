@@ -32,7 +32,7 @@ defineEmits<{
             Опубликовано: <span v-if="entity.published">✅</span>
             <span v-else>❌</span></div>
           <div v-if="entity.published_from" class="mb-2">Дата публикации: {{ entity.published_from }}</div>
-          <div class="inline-flex gap-2 m-2 items-center">
+          <div class="inline-flex gap-2 my-2 items-center">
             <RouterLink class="btn bg-emerald-200 hover:bg-emerald-400 rounded-2xl" :to="`edit/${entity.id}`">Изменить
             </RouterLink>
             <button class="btn bg-red-200 hover:bg-red-400 rounded-2xl" @click="$emit('deleteEntity', entity.id)">
@@ -48,8 +48,7 @@ defineEmits<{
 <style scoped>
 .btn {
   @apply
-  p-1
-  md:p-2
+  p-2
   lg:px-4
   flex
   justify-center

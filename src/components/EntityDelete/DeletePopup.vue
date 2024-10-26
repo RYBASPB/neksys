@@ -28,11 +28,11 @@ defineEmits<{
         </svg>
         <h3 class="text-xl font-normal text-gray-500 mt-5 mb-6">Вы действительно хотите удалить эту запись?</h3>
         <button @click="$emit('confirm')"
-           class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+           class="btn mr-2 text-white bg-red-600 hover:bg-red-800 border font-medium">
           Да
         </button>
         <button @click="$emit('cancel')"
-           class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
+           class="btn text-gray-900 bg-white hover:bg-gray-200 border border-gray-200 font-medium"
            data-modal-toggle="delete-user-modal">
           Нет
         </button>
@@ -43,5 +43,15 @@ defineEmits<{
 </template>
 
 <style scoped>
-
+.btn {
+  @apply
+  p-2
+  px-6
+  inline-flex
+  justify-center
+  items-center
+  text-base
+  sm:text-sm
+  rounded-2xl;
+}
 </style>
