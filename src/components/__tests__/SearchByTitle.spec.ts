@@ -9,6 +9,7 @@ describe('SearchByTitle', () => {
     const testText = faker.lorem.sentence()
     const input = screen.getByRole('textbox')
     await fireEvent.update(input, testText)
+    // @ts-expect-error emited
     expect(emitted().searchValue[0][0]).toEqual(testText)
   })
 })
