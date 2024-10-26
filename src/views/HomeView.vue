@@ -2,7 +2,6 @@
 import { allEntities } from '@/state/entities'
 import SearchByTitle from '@/components/SearchByTitle.vue'
 import { computed, defineAsyncComponent, ref } from 'vue'
-import type { Entity } from '@/models/entity'
 import DeletePopup from '@/components/EntityDelete/DeletePopup.vue'
 import { isTableView } from '@/state/ui'
 import EntitiesLoading from '@/components/EntitiesList/EntitiesLoading.vue'
