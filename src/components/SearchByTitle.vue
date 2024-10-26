@@ -1,5 +1,13 @@
 <script setup lang="ts">
-console.log()
+const emit = defineEmits<{
+  (e: 'searchValue', input: string): void
+}>()
+
+const handleInput = (event: Event): void => {
+  const input = event.target as HTMLInputElement
+  const value = input.value
+  emit('searchValue', value ?? '')
+}
 </script>
 
 <template>
@@ -8,7 +16,7 @@ console.log()
       class="search animation"
       type="text"
       placeholder="Найти ..."
-      @input="$emit('searchValue', ($event.target as HTMLInputElement).value)"
+      @input="handleInput"
     />
   </div>
 </template>
