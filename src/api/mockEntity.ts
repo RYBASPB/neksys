@@ -4,9 +4,9 @@ import type { EntityApi, UpdateEntityDto } from '@/api/entity'
 import type { Entity } from '@/models/entity'
 import { ENTITY_EXISTS, NO_ENTITY_FOUND } from '@/shared/constants'
 
-function createEntityList(): Entity[] {
+export function createEntityList(length = 100): Entity[] {
   const list: Entity[] = []
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < length; i++) {
     const entity: Entity = {
       description: faker.lorem.paragraphs(10),
       id: i + 1,
